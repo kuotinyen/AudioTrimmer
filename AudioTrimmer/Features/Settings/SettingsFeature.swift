@@ -20,7 +20,12 @@ struct SettingsFeature {
     
     enum Action: BindableAction {
         case binding(BindingAction<State>)
-        case validateSettings
+        case validateAndOpenTrimmer
+        case delegate(Delegate)
+        
+        enum Delegate {
+            case openTrimmer(TrimmerConfiguration)
+        }
     }
     
     var body: some Reducer<State, Action> {
@@ -30,12 +35,24 @@ struct SettingsFeature {
             switch action {
             case .binding:
                 return .none
-            case .validateSettings:
+            case .validateAndOpenTrimmer:
                 state.validationError = validateSettings(
                     totalLengthSeconds: state.totalLengthSeconds,
                     keyTimesInput: state.keyTimesInput,
                     selectionLengthPercent: state.musicTimelineSelectionLengthPercent
                 )
+                
+                // If validation passes, send delegate action
+                if state.validationError == nil {
+                    let config = TrimmerConfiguration(
+                        totalLengthSeconds: state.totalLengthSeconds,
+                        keyTimePercents: state.keyTimesInput.toPercents(),
+                        musicTimelineSelectionLengthPercent: state.musicTimelineSelectionLengthPercent / 100.0
+                    )
+                    return .send(.delegate(.openTrimmer(config)))
+                }
+                return .none
+            case .delegate:
                 return .none
             }
         }

@@ -16,6 +16,9 @@ struct AppView: View {
             SettingsView(
                 store: store.scope(state: \.settings, action: \.settings)
             )
+            .navigationDestination(item: $store.scope(state: \.trimmer, action: \.trimmer)) { trimmerStore in
+                TrimmerView(store: trimmerStore)
+            }
         }
     }
 }

@@ -139,10 +139,7 @@ private extension SettingsView {
     
     var openTrimmerButton: some View {
         Button(action: {
-            store.send(.validateSettings)
-            if store.validationError == nil {
-                #warning("send delegate")
-            }
+            store.send(.validateAndOpenTrimmer)
         }) {
             HStack {
                 Spacer()

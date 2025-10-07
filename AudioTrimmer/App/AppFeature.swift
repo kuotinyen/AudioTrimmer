@@ -13,10 +13,12 @@ struct AppFeature {
     @ObservableState
     struct State: Equatable {
         var settings = SettingsFeature.State()
+        @Presents var trimmer: TrimmerFeature.State?
     }
 
     enum Action {
         case settings(SettingsFeature.Action)
+        case trimmer(PresentationAction<TrimmerFeature.Action>)
     }
 
     var body: some ReducerOf<Self> {
@@ -26,9 +28,17 @@ struct AppFeature {
 
         Reduce { state, action in
             switch action {
+            case .settings(.delegate(.openTrimmer(let config))):
+                state.trimmer = TrimmerFeature.State(config: config)
+                return .none
             case .settings:
                 return .none
+            case .trimmer:
+                return .none
             }
+        }
+        .ifLet(\.$trimmer, action: \.trimmer) {
+            TrimmerFeature()
         }
     }
 }
