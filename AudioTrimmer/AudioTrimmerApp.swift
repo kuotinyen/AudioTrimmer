@@ -5,13 +5,18 @@
 //  Created by Ting-Yen, Kuo on 2025/10/7.
 //
 
+import ComposableArchitecture
 import SwiftUI
 
 @main
 struct AudioTrimmerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView(
+                store: Store(initialState: AppFeature.State()) {
+                    AppFeature()
+                }
+            )
         }
     }
 }
