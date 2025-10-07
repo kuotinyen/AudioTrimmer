@@ -25,6 +25,10 @@ struct TrimmerFeature {
             let selectionSize = config.musicTimelineSelectionLengthPercent.clamped()
             self.musicTimelineSelection = (0.0...selectionSize).validated()
         }
+        
+        var keyTimes: [Double] {
+            config.keyTimePercents
+        }
 
         var selectionSize: Double {
             musicTimelineSelection.upperBound - musicTimelineSelection.lowerBound
