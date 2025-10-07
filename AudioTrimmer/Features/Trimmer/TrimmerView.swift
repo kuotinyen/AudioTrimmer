@@ -18,7 +18,10 @@ struct TrimmerView: View {
                 KeyTimeSelectionView(
                     keyTimes: store.keyTimes,
                     musicTimelineSelection: store.musicTimelineSelection,
-                    current: store.playhead
+                    current: store.playhead,
+                    onKeyTimeTapped: { percent in
+                        store.send(.keyTimeTapped(percent))
+                    }
                 )
                 .background(Color(.systemGray6))
                 

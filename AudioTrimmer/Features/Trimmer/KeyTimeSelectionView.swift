@@ -11,7 +11,8 @@ struct KeyTimeSelectionView: View {
     let keyTimes: [Double]
     let musicTimelineSelection: ClosedRange<Double>
     let current: Double
-    
+    let onKeyTimeTapped: (Double) -> Void
+
     var body: some View {
         VStack(spacing: 12) {
             Text("KeyTime Selection")
@@ -27,7 +28,8 @@ struct KeyTimeSelectionView: View {
             // Key Time Points Bar
             KeyTimePointsBar(
                 keyTimes: keyTimes,
-                musicTimelineSelection: musicTimelineSelection
+                musicTimelineSelection: musicTimelineSelection,
+                onKeyTimeTapped: onKeyTimeTapped
             )
             .padding(.horizontal)
         }
@@ -43,7 +45,8 @@ extension KeyTimeSelectionView {
     struct KeyTimePointsBar: View {
         let keyTimes: [Double]
         let musicTimelineSelection: ClosedRange<Double>
-        
+        let onKeyTimeTapped: (Double) -> Void
+
         var body: some View {
             GeometryReader { geometry in
                 let barWidth = geometry.size.width
@@ -70,11 +73,14 @@ extension KeyTimeSelectionView {
                     ForEach(keyTimes, id: \.self) { keyTime in
                         let dotOffset = keyTime * barWidth
                         let dotLength: CGFloat = barHeight + 4
-                        
+
                         Circle()
                             .fill(Color.red)
                             .frame(width: dotLength, height: dotLength)
                             .offset(x: dotOffset - 5)  // Center the dot
+                            .onTapGesture {
+                                onKeyTimeTapped(keyTime)
+                            }
                     }
                 }
             }
@@ -89,7 +95,8 @@ extension KeyTimeSelectionView {
     KeyTimeSelectionView(
         keyTimes: [0.1, 0.35, 0.68],
         musicTimelineSelection: 0.42...0.46,
-        current: 0.408
+        current: 0.408,
+        onKeyTimeTapped: { _ in }
     )
     .background(Color.black)
 }
