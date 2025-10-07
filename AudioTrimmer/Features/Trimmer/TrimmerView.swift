@@ -12,11 +12,31 @@ struct TrimmerView: View {
     @Bindable var store: StoreOf<TrimmerFeature>
     
     var body: some View {
-        #warning("dummy view")
-        VStack {
-            Text(String(store.config.totalLengthSeconds))
-            Text(store.config.keyTimePercents.map(\.description).joined(separator: ", "))
-            Text(String(store.config.musicTimelineSelectionLengthPercent))
-        }
+        // Timeline
+        TimelineView(
+            totalLengthSeconds: store.config.totalLengthSeconds,
+            musicTimelineSelection: store.musicTimelineSelection,
+            playhead: store.playhead,
+            playState: store.playState,
+            playedProgress: store.playedProgress,
+            onMusicTimelineSelectionDragged: { offset in
+                store.send(.musicTimelineSelectionDragged(offset: offset))
+            },
+            onDragStarted: {
+                store.send(.dragStarted)
+            },
+            onDragEnded: {
+                store.send(.dragEnded)
+            },
+            onPlayTapped: {
+                store.send(.playTapped)
+            },
+            onPauseTapped: {
+                store.send(.pauseTapped)
+            },
+            onResetTapped: {
+                store.send(.resetTapped)
+            }
+        )
     }
 }

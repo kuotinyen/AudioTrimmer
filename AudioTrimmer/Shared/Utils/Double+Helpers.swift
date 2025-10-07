@@ -17,4 +17,11 @@ extension Double {
     func toPercentString() -> String {
         String(format: "%.1f%%", self * 100)
     }
+    
+    /// Converts seconds to time string (MM:SS)
+    func toTimeString() -> String {
+        let minutes = Int(self) / 60
+        let seconds = Int(self) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
 }
