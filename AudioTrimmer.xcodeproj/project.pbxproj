@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D29221CA2E9555EA00C2DC52 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D29221C92E9555EA00C2DC52 /* ComposableArchitecture */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		05E6E6162E954FEC00D5B193 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D29221CA2E9555EA00C2DC52 /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				05E6E6072E954FEA00D5B193 /* AudioTrimmer */,
 				05E6E6182E954FEC00D5B193 /* AudioTrimmerTests */,
 				05E6E6222E954FEC00D5B193 /* AudioTrimmerUITests */,
+				D29221C82E9555EA00C2DC52 /* Frameworks */,
 				05E6E6062E954FEA00D5B193 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				05E6E61F2E954FEC00D5B193 /* AudioTrimmerUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D29221C82E9555EA00C2DC52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,7 @@
 			);
 			name = AudioTrimmer;
 			packageProductDependencies = (
+				D29221C92E9555EA00C2DC52 /* ComposableArchitecture */,
 			);
 			productName = AudioTrimmer;
 			productReference = 05E6E6052E954FEA00D5B193 /* AudioTrimmer.app */;
@@ -566,6 +580,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D29221C92E9555EA00C2DC52 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05E6E6322E95508300D5B193 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 05E6E5FD2E954FEA00D5B193 /* Project object */;
 }
